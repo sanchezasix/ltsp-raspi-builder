@@ -1,0 +1,17 @@
+Source: ltsp-raspi-builder
+Section: admin
+Priority: optional
+Maintainer: El teu nom <el teu correu>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: https://anonscm.debian.org/git/collab-maint/sample-package.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/sample-package.git
+
+Package: ltsp-raspi-builder
+Architecture: any
+Depends: ${shlibs:Depends}, Llista de paquets dels que depens, separats per comes
+Description: Descripció curta
+ Descripció llarga, pot tindre vàries
+ línies, però recorda que han de començar
+ amb un espai.
