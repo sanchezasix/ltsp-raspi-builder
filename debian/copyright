@@ -3,8 +3,7 @@ Upstream-Name: sample-package
 Source: <url://example.com>
 
 Files: *
-Copyright: <years> <put author's name and email here>
-           <years> <likewise for another author>
+Copyright: Copyright 2019 Miguel Sanchez <sanchezsanzvgk@gmail.com>
 License: GPL-3.0+
 
 
