@@ -1,4 +1,13 @@
-ltsp-raspi-builder (0.0.1) unstable; urgency=medium
+ltsp-raspi-builder (0.0.2) bionic; urgency=medium
+
+  * Added automatic generation of images
+  * Added DNSMasq configuration
+  * Added routing from server
+  * Added background and desktop configuration for clients
+
+ -- Miguel Sanchez <sanchezsanzvgk@gmail.com>  Wed, 29 May 2019 13:34:59 +0200
+
+ltsp-raspi-builder (0.0.1) bionic; urgency=medium
 
   * Initial Release.
 

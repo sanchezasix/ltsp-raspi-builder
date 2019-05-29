@@ -9,12 +9,20 @@ for i in `cat /proc/net/dev |  grep ":" | tr -s " " | sed "s/^[ \t]*//" | cut -f
         opciones="${opciones} ${i} ${ip}"
 done
 
+############## Variable para guardar la tarjeta de la red interna ###########
 DHCP_INTERFACE=`zenity --list --title="Interfaz de la red interna" --column="Interfaz" --column="Dirección actual" $opciones`
+
+# Se podria hacer que si se ha seleccionado anteriormente una tarjeta de red en para
+# la variable  DHCP_INTERFACES no apareciera la tarjeta anteriormente selccionada
+############## Variable para guardar la tarjeta de la red externa ###########
 EXTERNAL_INTERFACE=`zenity --list --title="Interfaz de la red EXTERNA" --column="Interfaz" --column="Dirección actual" $opciones`
+
 # Si no se indica interfaz interna salimos con error
 [ "${DHCP_INTERFACE}" == "" ] && exit -1
+# Si no se indica interfaz EXTERNA salimos con error
 [ "${EXTERNAL_INTERFACE}" == "" ] && exit -1
 
+### Recuadro que nos va permitir recoguer en un array los datos que nos pase el usuario. ###
 DATA=`zenity --forms --title="Configuración de red" \
    --text="Indique los siguientes valores para configurar la red interna" \
    --add-entry="Dirección IP" \
@@ -26,6 +34,7 @@ DATA=`zenity --forms --title="Configuración de red" \
    
    `   
 
+### Variables a las que les vamos a asignar los valores del array anterior para poder aplicarlas en la configuracion ###
 INTERNAL_IP=`echo ${DATA} | cut -d"|" -f "1"`
 INTERNAL_MASK=`echo ${DATA} | cut -d"|" -f "2"`
 DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`
@@ -43,12 +52,14 @@ function render_template() {
   eval "echo \"$(cat $1)\""
 }
 
+### Funcion para configurar el dnsmasq que nos permite utilizar las variables anteriores###
 function generate_dnsmasq_conf {
   echo "# Generando el fichero /etc/dnsmasq/ltsp.conf"
   render_template /var/lib/ltsp-raspi-builder/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
   #render_template /tmp/dnsmasq.template > /tmp/ltsp # Para tests
 }
 
+### Funcion para configurar el netplan que nos permite utilizar las variables anteriores###
 function generate_network_conf {
   echo "# Generando el fichero /etc/netplan/50-static-internal-interface.yaml "
   render_template /var/lib/ltsp-raspi-builder/50-static-internal-interface.yaml.template  > /etc/netplan/50-static-internal-interface.yaml 
@@ -60,6 +71,11 @@ function generate_dirs_dnsmasq {
 
 }
 
+### Funcion para preparar el sistema para que nos permita añadir las siguientes lineas
+# dentro del archivo /etc/environment para asi guardar las variables como globales 
+# para poder utilizarlas para crear el archivo cmdline.txt para configurar el arranque de
+# la raspberry y tambien para crear un script con reglas de iptbales para enrrutar los paquetes
+# de la red interna con la externa.
 function preparedsd {
 
     sed -i "/INTERNAL_IP/d" /etc/environment
@@ -70,6 +86,8 @@ function preparedsd {
 
 }
 
+### Inicializacion de las variables ###
+# Nos mostrara el processo en una pestaña emerguente del processo de instalacion.
 (generate_dnsmasq_conf && 
  generate_network_conf && 
  echo "# Aplicando configuración de red" && 
