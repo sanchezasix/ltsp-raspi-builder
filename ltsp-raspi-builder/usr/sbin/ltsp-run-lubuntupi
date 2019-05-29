@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Lanzamos el servidor gráfico Xephyr en background
+Xephyr -screen 800x600 :40 &
+
+# Esperamos 3 segundos para que se cargue
+sleep 3
+
+# Lanzamos la sesión en el chroot
+ltsp-chroot -p -m -a lubuntupi xeph_session.sh
+
+while [ `mount | grep /opt/ltsp/lubuntupi/dev | wc -l` -gt 0 ]; 
+do 
+    umount -l /opt/ltsp/lubuntupi/dev > /dev/null 2>&1
+    sleep 1
+done
+
+
