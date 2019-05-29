@@ -68,6 +68,7 @@ function generate_network_conf {
 
 function generate_dirs_dnsmasq {
 #Creamos las siguientes carpetas para que no de errores al iniciar el servicio de dnsmasq 
+return 0
 
 }
 
