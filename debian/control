@@ -10,7 +10,7 @@ Standards-Version: 4.1.2
 
 Package: ltsp-raspi-builder
 Architecture: any
-Depends: ${shlibs:Depends}, ltsp-server, ltsp-server-standalone, dnsmasq, epoptes
+Depends: ${shlibs:Depends}, ltsp-server, ltsp-server-standalone, dnsmasq, epoptes, zenity
 Description: Soporte LTSP para Raspberry Pi como cliente semiligero.
  Este paquete añade soporte al 
  Servidor LTSP de Raspberry Pi's
