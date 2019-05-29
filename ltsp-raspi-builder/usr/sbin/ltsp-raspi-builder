@@ -2,21 +2,28 @@
 
 ## 1º Comprobar si el chroot existe.
 
-if ! [ -d /opt/ltsp/lubuntupi ]
+if   [ ! -d /opt/ltsp/lubuntupi ];
 then
-# Generamos el chroot con ltsp-build-client, la arquitectura y la plantilla, sin generar todavía el .img
-ltsp-build-client --arch armhf --skipimage --config /etc/ltsp/templates/lubuntu-pi.conf
 
-# Añadimos algunos archivos de configuración en la imagen
-cp -r /var/lib/ltsp-raspi-builder/client.override/* /opt/ltsp/lubuntupi
-# Dins la carpeta client.override posarem tot el que volgam afegir de extra a la imatge, a banda
-# dels scripts per regenerar la carpeta de l'usuari, la temàtica i tal
-# Afegirem també els fons d'escriptori
+    BACKGROUND= `zenity --file-selection --title="Selecciona tu imagen" `
+    # Generamos el chroot con ltsp-build-client, la arquitectura y la plantilla, sin generar todavía el .img
+    ltsp-build-client --arch armhf --skipimage --config /etc/ltsp/templates/lubuntu-pi.conf
 
-# Finalmente regeneramos los kernels y la imagen
-ltsp-chroot -p -m -a lubuntupi /usr/share/ltsp/update-kernels
-ltsp-update-kernels
-ltsp-update-image lubuntupi
+    # Añadimos algunos archivos de configuración en la imagen
+    cp -r /var/lib/ltsp-raspi-builder/client.override/* /opt/ltsp/lubuntupi
+  
+    #Copiar imagen a por defecto
+    if [ "${BACKGROUND}" != "" ]; then
+        
+        cp ${BACKGROUND} /opt/ltsp/lubuntupi/usr/share/lubuntu/wallpapers/ltsp-raspi.png
+    # Dins la carpeta client.override posarem tot el que volgam afegir de extra a la imatge, a banda
+    # dels scripts per regenerar la carpeta de l'usuari, la temàtica i tal
+    # Afegirem també els fons d'escriptori
+
+    # Finalmente regeneramos los kernels y la imagen
+    ltsp-chroot -p -m -a lubuntupi /usr/share/ltsp/update-kernels
+    ltsp-update-kernels
+    ltsp-update-image lubuntupi
 
 else
 

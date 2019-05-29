@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ "${INTERNAL_IP}" = "" ]; then
+    echo "Necesitas ejecutar previamente el ltsp-raspi-builder-dnsmasq"
+    exit -1
+fi
+
+FOLDERSD=`zenity --file-selection --title="Carpeta para guardar el arranque de la Raspberry Pi" --directory
+
+mkdir -p "$FOLDERSD/lubuntupiboot"
+cd "$FOLDERSD/lubuntupiboot"
+
+svn export --force https://github.com/raspberrypi/firmware/branches/stable/boot .
+cp /var/lib/tftpboot/ltsp/lubuntupi/{vmlinuz,initrd.img} .
+
+echo "# See https://www.raspberrypi.org/documentation/configuration/config-txt/README.md
+# for many tuning options (e.g. monitor resolution) that you can put in this file.
+kernel vmlinuz
+initramfs initrd.img
+# Enable audio (loads snd_bcm2835)
+dtparam=audio=on" > config.txt
+
+echo "dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 elevator=deadline rootwait init=/sbin/init-ltsp root=/dev/nbd0 nbdroot=${INTERNAL_IP}:/opt/ltsp/lubuntupi" > cmdline.txt
+

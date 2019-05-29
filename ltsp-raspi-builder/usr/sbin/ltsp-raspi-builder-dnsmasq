@@ -10,10 +10,10 @@ for i in `cat /proc/net/dev |  grep ":" | tr -s " " | sed "s/^[ \t]*//" | cut -f
 done
 
 DHCP_INTERFACE=`zenity --list --title="Interfaz de la red interna" --column="Interfaz" --column="Dirección actual" $opciones`
-
+EXTERNAL_INTERFACE=`zenity --list --title="Interfaz de la red EXTERNA" --column="Interfaz" --column="Dirección actual" $opciones`
 # Si no se indica interfaz interna salimos con error
 [ "${DHCP_INTERFACE}" == "" ] && exit -1
-
+[ "${EXTERNAL_INTERFACE}" == "" ] && exit -1
 
 DATA=`zenity --forms --title="Configuración de red" \
    --text="Indique los siguientes valores para configurar la red interna" \
@@ -57,6 +57,16 @@ function generate_network_conf {
 
 function generate_dirs_dnsmasq {
 #Creamos las siguientes carpetas para que no de errores al iniciar el servicio de dnsmasq 
+
+}
+
+function preparedsd {
+
+    sed -i "/INTERNAL_IP/d" /etc/environment
+    echo "INTERNAL_IP=${INTERNAL_IP}" >> /etc/environment 
+
+    sed -i "/EXTERNAL_INTERFACE/d" /etc/environment
+    echo "EXTERNAL_INTERFACE=${EXTERNAL_INTERFACE}" >> /etc/environment 
 
 }
 

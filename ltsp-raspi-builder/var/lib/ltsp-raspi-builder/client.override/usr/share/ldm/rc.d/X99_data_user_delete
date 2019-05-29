@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if  ! [ ${LDM_USERNAME} = “administrador” ]
+then
+rm -rf /home/${LDM_USERNAME}/*
+mkdir /home/${LDM_USERNAME}/.config
+chown ${LDM_USERNAME} /home/${LDM_USERNAME}/.config
+cp -r /usr/share/ltsp-raspi/config/* /home/${LDM_USERNAME}/.config
+fi
+
+exit 0
+
