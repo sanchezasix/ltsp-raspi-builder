@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Preguntamos variables al usuario
+
+# interfaz de red interna
+for i in `cat /proc/net/dev |  grep ":" | tr -s " " | sed "s/^[ \t]*//" | cut -f1 -d":"`; do
+        ip="`ifconfig ${i} | grep "inet " | tr -s " " |  sed "s/^[ \t]*//" | cut -d" " -f 2`"
+        [ -z $ip ] && ip="-"
+        opciones="${opciones} ${i} ${ip}"
+done
+
+DHCP_INTERFACE=`zenity --list --title="Interfaz de la red interna" --column="Interfaz" --column="Dirección actual" $opciones`
+
+# Si no se indica interfaz interna salimos con error
+[ "${DHCP_INTERFACE}" == "" ] && exit -1
+
+
+DATA=`zenity --forms --title="Configuración de red" \
+   --text="Indique los siguientes valores para configurar la red interna" \
+   --add-entry="Dirección IP" \
+   --add-entry="Máscara de red" \
+   --add-entry="DHCP:DNS para los clientes" \
+   --add-entry="DCHP: Dominio para los clientes" \
+   --add-entry="DCHP: IP inicial" \
+   --add-entry="DCHP: IP final" \
+   
+   `   
+
+INTERNAL_IP=`echo ${DATA} | cut -d"|" -f "1"`
+INTERNAL_MASK=`echo ${DATA} | cut -d"|" -f "2"`
+DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`
+DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "4"`
+RANGE_INI=`echo ${DATA} | cut -d"|" -f "5"`
+RANGE_END=`echo ${DATA} | cut -d"|" -f "6"`
+
+#echo "INTERNAL_IP: ${INTERNAL_IP}"
+#echo "DNS_SERVER: ${DNS_SERVER}"
+#echo "DOMAIN_NAME: ${DOMAIN_NAME}"
+#echo "RANGE_INI: ${RANGE_INI}"
+#echo "RANGE_END: ${RANGE_END}"
+
+function render_template() {
+  eval "echo \"$(cat $1)\""
+}
+
+function generate_dnsmasq_conf {
+  echo "# Generando el fichero /etc/dnsmasq/ltsp.conf"
+  render_template /var/lib/ltsp-raspi-builder/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
+  #render_template /tmp/dnsmasq.template > /tmp/ltsp # Para tests
+}
+
+function generate_network_conf {
+  echo "# Generando el fichero /etc/netplan/50-static-internal-interface.yaml "
+  render_template /var/lib/ltsp-raspi-builder/50-static-internal-interface.yaml.template  > /etc/netplan/50-static-internal-interface.yaml 
+  #render_template /tmp/50-static-internal-interface.yaml.template > /tmp/50-static-internal-interface.yaml # Para tests
+}
+
+function generate_dirs_dnsmasq {
+#Creamos las siguientes carpetas para que no de errores al iniciar el servicio de dnsmasq 
+
+}
+
+(generate_dnsmasq_conf && 
+ generate_network_conf && 
+ echo "# Aplicando configuración de red" && 
+ netplan apply &&
+ echo "# Finalizado") | tee >(zenity --progress --pulsate --title "Aplicando cambios" )
+
+# Falta afegir la resta de configuració si és necessària (pàgina 38, etc)
+# I afegir les regles d'iptables
+
