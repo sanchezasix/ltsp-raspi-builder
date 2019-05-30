@@ -2,7 +2,7 @@
 Description=routing service
 
 [Service]
-ExecStart=/usr/sbin/routing.sh
+ExecStart=/usr/sbin/routing
 
 [Install]
 WantedBy=multi-user.target

@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: sample-package
-Source: <url://example.com>
+Upstream-Name: ltsp-raspi-builder
+Source: https://github.com/sanchezasix/ltsp-raspi-builder.git
 
 Files: *
 Copyright: Copyright 2019 Miguel Sanchez <sanchezsanzvgk@gmail.com>

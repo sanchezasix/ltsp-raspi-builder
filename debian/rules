@@ -13,13 +13,15 @@
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
-
 %:
 	dh $@ --with systemd
 
+override_dh_installinit:
+	dh_systemd_enable --name=routing routing.service
+	dh_installinit --no-start --noscripts
+	dh_systemd_start --no-restart-on-upgrade
 
-# dh_make generated override targets
-# This is example for Cmake (See https://bugs.debian.org/641051 )
-#override_dh_auto_configure:
-#	dh_auto_configure -- #	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
+override_dh_systemd_start:
+	echo "Not running dh_systemd_start"
+
 
