@@ -31,6 +31,8 @@ DATA=`zenity --forms --title="Configuración de red" \
    --add-entry="DCHP: Dominio para los clientes" \
    --add-entry="DCHP: IP inicial" \
    --add-entry="DCHP: IP final" \
+   --add-entry="DNS Externo" \
+   --add-entry="DNS Externo 2" \
    
    `   
 
@@ -41,12 +43,18 @@ DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`
 DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "4"`
 RANGE_INI=`echo ${DATA} | cut -d"|" -f "5"`
 RANGE_END=`echo ${DATA} | cut -d"|" -f "6"`
+DNS_EXTERNAL=`echo ${DATA} | cut -d"|" -f "7"`
+DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "8"`
 
 #echo "INTERNAL_IP: ${INTERNAL_IP}"
 #echo "DNS_SERVER: ${DNS_SERVER}"
 #echo "DOMAIN_NAME: ${DOMAIN_NAME}"
 #echo "RANGE_INI: ${RANGE_INI}"
 #echo "RANGE_END: ${RANGE_END}"
+
+############ Variables extras ############
+## Assignamos el nombre del equipo para utilizarlo mas tarde.
+NAME_SERVER= `cat /etc/hostname | tr -s " " | cut -f 1 -d" "` 
 
 function render_template() {
   eval "echo \"$(cat $1)\""
@@ -68,6 +76,17 @@ function generate_network_conf {
 
 function generate_dirs_dnsmasq {
 #Creamos las siguientes carpetas para que no de errores al iniciar el servicio de dnsmasq 
+
+    mkdir -p /var/lib/dnsmasq/{macs,config,hosts}
+    
+    #Añadimos la siguente linea al  archivo server para que el dnsmasq sepa quien es el servidor
+    echo "${INTERNAL_IP} ${NAME_SERVER}.${DOMAIN_NAME}" > /var/lib/dnsmasq/hosts/server 
+    #Añadimos dos dns al archivo extra-dns para que el dnsmasq no nos de error por falta de dns
+    echo -e "server=${DNS_EXTERNAL} \nserver=${DNS_EXTERNALTWO}"> /var/lib/dnsmasq/config/extra-dns
+    #Descomentamos la linea en resolved.conf para que no aparezcan problemas con el resolv y el dnsmasq
+    sed 's/#DNSStubListener=no/DNSStubListener=no/g' /etc/systemd/resolved.conf
+
+
 return 0
 
 }
