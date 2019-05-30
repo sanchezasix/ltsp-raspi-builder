@@ -20,7 +20,8 @@ set -e
 
 case "$1" in
     configure)
-        systemctl enable --now routing
+        #systemctl enable --now routing
+        update-rc.d routing enable
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
