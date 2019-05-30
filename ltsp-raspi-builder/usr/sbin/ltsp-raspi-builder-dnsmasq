@@ -37,14 +37,14 @@ DATA=`zenity --forms --title="Configuración de red" \
    `   
 
 ### Variables a las que les vamos a asignar los valores del array anterior para poder aplicarlas en la configuracion ###
-INTERNAL_IP=`echo ${DATA} | cut -d"|" -f "1"`
-INTERNAL_MASK=`echo ${DATA} | cut -d"|" -f "2"`
-DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`
-DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "4"`
-RANGE_INI=`echo ${DATA} | cut -d"|" -f "5"`
-RANGE_END=`echo ${DATA} | cut -d"|" -f "6"`
-DNS_EXTERNAL=`echo ${DATA} | cut -d"|" -f "7"`
-DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "8"`
+INTERNAL_IP=`echo ${DATA} | cut -d"|" -f "1"` #IP de red interna
+INTERNAL_MASK=`echo ${DATA} | cut -d"|" -f "2"` #Bits de Mascara de red interna
+DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`    #IP DNS del servidor
+DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "4"` #Nombre del dominio del servidor
+RANGE_INI=`echo ${DATA} | cut -d"|" -f "5"` #Rango en la que empieza las ips de concesion del dhcp
+RANGE_END=`echo ${DATA} | cut -d"|" -f "6"` #Rango en la que terminan las ips de concesion del dhcp
+DNS_EXTERNAL=`echo ${DATA} | cut -d"|" -f "7"` #DNS externo para el servidor
+DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "8"` #Segundo DNS externo para el servidor
 
 #echo "INTERNAL_IP: ${INTERNAL_IP}"
 #echo "DNS_SERVER: ${DNS_SERVER}"
@@ -60,7 +60,7 @@ function render_template() {
   eval "echo \"$(cat $1)\""
 }
 
-### Funcion para configurar el dnsmasq que nos permite utilizar las variables anteriores###
+### Funcion para configurar el dnsmasq, que nos permite utilizar las variables anteriores###
 function generate_dnsmasq_conf {
   echo "# Generando el fichero /etc/dnsmasq/ltsp.conf"
   render_template /var/lib/ltsp-raspi-builder/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
@@ -98,10 +98,18 @@ return 0
 # de la red interna con la externa.
 function preparedsd {
 
+    #Crearemos las siguientes globales para asi poder utilizar los valores en otras configuraciones.
+
+    #Borramos la linea INTERNAL_IP de /etc/environment si existe.
     sed -i "/INTERNAL_IP/d" /etc/environment
+    #Añadimos la variable INTERNAL_IP al /etc/environment para hacerla global con el contenido de la variable 
+    #INTERNAL_IP que es la ip que nos pasara el usuario para assignar la ip del servidor.
     echo "INTERNAL_IP=${INTERNAL_IP}" >> /etc/environment 
 
+    #Borramos la linea EXTERNAL_INTERFACE de /etc/environment si existe.
     sed -i "/EXTERNAL_INTERFACE/d" /etc/environment
+    #Añadimos la variable EXTERNAL_INTERFACE al /etc/environment para hacerla global con el contenido 
+    #de la variable  EXTERNAL_INTERFACE que es la tarjeta de red interna del servidor.
     echo "EXTERNAL_INTERFACE=${EXTERNAL_INTERFACE}" >> /etc/environment 
 
 }
