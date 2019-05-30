@@ -26,7 +26,7 @@ EXTERNAL_INTERFACE=`zenity --list --title="Interfaz de la red EXTERNA" --column=
 DATA=`zenity --forms --title="Configuración de red" \
    --text="Indique los siguientes valores para configurar la red interna" \
    --add-entry="Dirección IP" \
-   --add-entry="Máscara de red" \
+   --add-entry="Máscara de red en bits" \
    --add-entry="DHCP:DNS para los clientes" \
    --add-entry="DCHP: Dominio para los clientes" \
    --add-entry="DCHP: IP inicial" \
