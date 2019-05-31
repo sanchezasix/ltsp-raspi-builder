@@ -27,7 +27,6 @@ DATA=`zenity --forms --title="Configuración de red" \
    --text="Indique los siguientes valores para configurar la red interna" \
    --add-entry="Dirección IP" \
    --add-entry="Máscara de red en bits" \
-   --add-entry="DHCP:DNS para los clientes" \
    --add-entry="DCHP: Dominio para los clientes" \
    --add-entry="DCHP: IP inicial" \
    --add-entry="DCHP: IP final" \
@@ -39,12 +38,12 @@ DATA=`zenity --forms --title="Configuración de red" \
 ### Variables a las que les vamos a asignar los valores del array anterior para poder aplicarlas en la configuracion ###
 INTERNAL_IP=`echo ${DATA} | cut -d"|" -f "1"` #IP de red interna
 INTERNAL_MASK=`echo ${DATA} | cut -d"|" -f "2"` #Bits de Mascara de red interna
-DNS_SERVER=`echo ${DATA} | cut -d"|" -f "3"`    #IP DNS del servidor
-DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "4"` #Nombre del dominio del servidor
-RANGE_INI=`echo ${DATA} | cut -d"|" -f "5"` #Rango en la que empieza las ips de concesion del dhcp
-RANGE_END=`echo ${DATA} | cut -d"|" -f "6"` #Rango en la que terminan las ips de concesion del dhcp
-DNS_EXTERNAL=`echo ${DATA} | cut -d"|" -f "7"` #DNS externo para el servidor
-DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "8"` #Segundo DNS externo para el servidor
+DNS_SERVER=`echo ${INTERNAL_IP}`    #IP DNS del servidor
+DOMAIN_NAME=`echo ${DATA} | cut -d"|" -f "3"` #Nombre del dominio del servidor
+RANGE_INI=`echo ${DATA} | cut -d"|" -f "4"` #Rango en la que empieza las ips de concesion del dhcp
+RANGE_END=`echo ${DATA} | cut -d"|" -f "5"` #Rango en la que terminan las ips de concesion del dhcp
+DNS_EXTERNAL=`echo ${DATA} | cut -d"|" -f "6"` #DNS externo para el servidor
+DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "7"` #Segundo DNS externo para el servidor
 
 #echo "INTERNAL_IP: ${INTERNAL_IP}"
 #echo "DNS_SERVER: ${DNS_SERVER}"
@@ -54,7 +53,7 @@ DNS_EXTERNALTWO=`echo ${DATA} | cut -d"|" -f "8"` #Segundo DNS externo para el s
 
 ############ Variables extras ############
 ## Assignamos el nombre del equipo para utilizarlo mas tarde.
-NAME_SERVER= `cat /etc/hostname | tr -s " " | cut -f 1 -d" "` 
+NAME_SERVER=`cat /etc/hostname | tr -s " " | cut -f 1 -d" "` 
 
 function render_template() {
   eval "echo \"$(cat $1)\""
@@ -84,7 +83,7 @@ function generate_dirs_dnsmasq {
     #Añadimos dos dns al archivo extra-dns para que el dnsmasq no nos de error por falta de dns
     echo -e "server=${DNS_EXTERNAL} \nserver=${DNS_EXTERNALTWO}"> /var/lib/dnsmasq/config/extra-dns
     #Descomentamos la linea en resolved.conf para que no aparezcan problemas con el resolv y el dnsmasq
-    sed 's/#DNSStubListener=no/DNSStubListener=no/g' /etc/systemd/resolved.conf
+    sed -i 's/#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
 
 
 return 0
@@ -134,7 +133,8 @@ function prepareRouting {
 
 ### Inicializacion de las variables ###
 # Nos mostrara el processo en una pestaña emerguente del processo de instalacion.
-(generate_dnsmasq_conf && 
+(generate_dirs_dnsmasq &&
+ generate_dnsmasq_conf && 
  generate_network_conf && 
  echo "# Aplicando configuración de red" && 
  netplan apply &&

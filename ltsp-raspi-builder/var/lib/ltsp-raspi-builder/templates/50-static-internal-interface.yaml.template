@@ -2,6 +2,6 @@
 # Direccionamiento estático
 network:
     ethernets:
-       enp0s8: 
+       ${DHCP_INTERFACE}: 
            addresses: [${INTERNAL_IP}/${INTERNAL_MASK}]
            gateway4: 127.0.0.1

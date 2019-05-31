@@ -31,20 +31,20 @@ tftp-root=/var/lib/tftpboot
 ##### CONFIGURACIÓN DEL DHCP
 
 interface="${DHCP_INTERFACE}"
-dhcp-authoritive
+dhcp-authoritative
 dhcp-ignore-names
 dhcp-option=option:router,0.0.0.0
-#dhcp-option=option:dns-server,${DNS_SERVER} ## Cal revisar açò....
-#dhcp-option=option:domain-name,${DOMAIN_NAME}
-#dhcp-option=option:domain-search,${DOMAIN_NAME}
+dhcp-option=option:dns-server,${DNS_SERVER} ## Cal revisar açò....
+dhcp-option=option:domain-name,${DOMAIN_NAME}
+dhcp-option=option:domain-search,${DOMAIN_NAME}
 
 # Rango de IPs
 dhcp-range=${RANGE_INI},${RANGE_END},12h
 
 # CONF DIRS
-#conf-dir=/var/lib/dnsmasq/macs
-#conf-dir=/var/lib/dnsmasq/config
-#conf-dir=/etc/dnsmasq.d/
+conf-dir=/var/lib/dnsmasq/macs
+conf-dir=/var/lib/dnsmasq/config
+conf-dir=/etc/dnsmasq.d/
 
 # Activamos el log de DHCP
 log-dhcp
