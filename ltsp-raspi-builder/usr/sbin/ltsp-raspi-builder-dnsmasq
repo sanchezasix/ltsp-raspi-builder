@@ -117,8 +117,15 @@ function preparedsd {
 
 function prepareRouting {
   # Añade las reglas de iptables para dar acceso a Internet a los clientes
+
+
+  if [ "${INTERNAL_IP}" != "" ]; then      
+    IP=`ipcalc ${INTERNAL_IP} | grep Network | tr -s " " | cut -f 2 -d" "`
+  fi
+
   echo "# Generando el fichero /usr/sbin/routing"
   render_template /var/lib/ltsp-raspi-builder/templates/routing.template > /usr/sbin/routing
+  chmod +x /usr/sbin/routing
 
   # Ponemos en marcha el servicio
   systemctl enable --now routing
