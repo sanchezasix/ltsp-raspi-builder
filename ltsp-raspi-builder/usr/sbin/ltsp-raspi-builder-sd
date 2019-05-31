@@ -5,7 +5,7 @@ if [ "${INTERNAL_IP}" = "" ]; then
     exit -1
 fi
 
-FOLDERSD=`zenity --file-selection --title="Carpeta para guardar el arranque de la Raspberry Pi" --directory
+FOLDERSD=`zenity --file-selection --title="Carpeta para guardar el arranque de la Raspberry Pi" --directory`
 
 mkdir -p "$FOLDERSD/lubuntupiboot"
 cd "$FOLDERSD/lubuntupiboot"

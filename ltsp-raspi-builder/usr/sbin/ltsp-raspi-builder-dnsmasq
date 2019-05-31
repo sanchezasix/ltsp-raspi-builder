@@ -144,6 +144,7 @@ function reiniciar_servicios {
  netplan apply &&
  echo "# Activando routing" && 
  prepareRouting &&
+ preparedsd &&
  reiniciar_servicios &&
  echo "# Finalizado") | tee >(zenity --progress --pulsate --title "Aplicando cambios" )
 

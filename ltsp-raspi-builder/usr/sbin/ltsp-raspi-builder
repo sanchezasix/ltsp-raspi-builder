@@ -9,7 +9,7 @@ then
 
 fi
 
-BACKGROUND= `zenity --file-selection --title="Selecciona tu imagen" `
+BACKGROUND=`zenity --file-selection --title="Selecciona tu imagen" `
 # Generamos el chroot con ltsp-build-client, la arquitectura y la plantilla, sin generar todavía el .img
 ltsp-build-client --arch armhf --skipimage --config /etc/ltsp/templates/lubuntu-pi.conf
 
