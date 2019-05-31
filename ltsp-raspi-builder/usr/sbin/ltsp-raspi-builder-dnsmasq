@@ -84,7 +84,8 @@ function generate_dirs_dnsmasq {
     echo -e "server=${DNS_EXTERNAL} \nserver=${DNS_EXTERNALTWO}"> /var/lib/dnsmasq/config/extra-dns
     #Descomentamos la linea en resolved.conf para que no aparezcan problemas con el resolv y el dnsmasq
     sed -i 's/#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
-
+    #Reiniciamos el servicio para que se apliquen los canvios y no aparezcan errores en el dnsmasq
+    systemd-resolved.conf    
 
 return 0
 
