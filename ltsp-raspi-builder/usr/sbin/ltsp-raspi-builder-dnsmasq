@@ -131,6 +131,8 @@ function prepareRouting {
  generate_network_conf && 
  echo "# Aplicando configuración de red" && 
  netplan apply &&
+ echo "# Activando routing" && 
+ prepareRouting &&
  echo "# Finalizado") | tee >(zenity --progress --pulsate --title "Aplicando cambios" )
 
 # Falta afegir la resta de configuració si és necessària (pàgina 38, etc)
