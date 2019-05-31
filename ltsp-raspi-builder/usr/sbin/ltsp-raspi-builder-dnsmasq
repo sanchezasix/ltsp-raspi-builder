@@ -63,15 +63,15 @@ function render_template() {
 ### Funcion para configurar el dnsmasq, que nos permite utilizar las variables anteriores###
 function generate_dnsmasq_conf {
   echo "# Generando el fichero /etc/dnsmasq/ltsp.conf"
-  render_template /var/lib/ltsp-raspi-builder/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
-  #render_template /tmp/dnsmasq.template > /tmp/ltsp # Para tests
+  render_template /var/lib/ltsp-raspi-builder/templates/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
+  #render_template /var/lib/ltsp-raspi-builder/templates/dnsmasq.template > /tmp/ltsp.conf # Para tests
 }
 
 ### Funcion para configurar el netplan que nos permite utilizar las variables anteriores###
 function generate_network_conf {
   echo "# Generando el fichero /etc/netplan/50-static-internal-interface.yaml "
-  render_template /var/lib/ltsp-raspi-builder/50-static-internal-interface.yaml.template  > /etc/netplan/50-static-internal-interface.yaml 
-  #render_template /tmp/50-static-internal-interface.yaml.template > /tmp/50-static-internal-interface.yaml # Para tests
+  render_template /var/lib/ltsp-raspi-builder/templates/50-static-internal-interface.yaml.template  > /etc/netplan/50-static-internal-interface.yaml 
+  #render_template /var/lib/ltsp-raspi-builder/templates/50-static-internal-interface.yaml.template > /tmp/50-static-internal-interface.yaml # Para tests
 }
 
 function generate_dirs_dnsmasq {
@@ -92,7 +92,7 @@ return 0
 }
 
 ### Funcion para preparar el sistema para que nos permita añadir las siguientes lineas
-# dentro del archivo /etc/environment para asi guardar las variables como globales 
+# dentro del archivo /etc/environment para asi guardar las variables en el entorno
 # para poder utilizarlas para crear el archivo cmdline.txt para configurar el arranque de
 # la raspberry y tambien para crear un script con reglas de iptbales para enrrutar los paquetes
 # de la red interna con la externa.
@@ -113,6 +113,17 @@ function preparedsd {
     echo "EXTERNAL_INTERFACE=${EXTERNAL_INTERFACE}" >> /etc/environment 
 
 }
+
+
+function prepareRouting {
+  # Añade las reglas de iptables para dar acceso a Internet a los clientes
+  echo "# Generando el fichero /usr/sbin/routing"
+  render_template /var/lib/ltsp-raspi-builder/templates/routing.template > /usr/sbin/routing
+
+  # Ponemos en marcha el servicio
+  systemctl enable --now routing
+}
+
 
 ### Inicializacion de las variables ###
 # Nos mostrara el processo en una pestaña emerguente del processo de instalacion.

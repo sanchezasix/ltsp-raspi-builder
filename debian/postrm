@@ -21,7 +21,7 @@ set -e
 
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-        systemctl disable --now routing
+        #systemctl disable --now routing
         #update-rc.d routing disable
     ;;
 
