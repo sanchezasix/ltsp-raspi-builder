@@ -84,9 +84,7 @@ function generate_dirs_dnsmasq {
     echo -e "server=${DNS_EXTERNAL} \nserver=${DNS_EXTERNALTWO}"> /var/lib/dnsmasq/config/extra-dns
     #Descomentamos la linea en resolved.conf para que no aparezcan problemas con el resolv y el dnsmasq
     sed -i 's/#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
-    #Reiniciamos el servicio para que se apliquen los canvios y no aparezcan errores en el dnsmasq
-    service systemd-resolved restart    
-
+   
 return 0
 
 }
@@ -131,6 +129,11 @@ function prepareRouting {
   systemctl enable --now routing
 }
 
+function reiniciar_servicios {
+ #Reiniciamos el servicio para que se apliquen los canvios y no aparezcan errores en el dnsmasq
+    service systemd-resolved restart
+    sleep 5;service dnsmasq restart    
+}
 
 ### Inicializacion de las variables ###
 # Nos mostrara el processo en una pestaña emerguente del processo de instalacion.
@@ -141,6 +144,7 @@ function prepareRouting {
  netplan apply &&
  echo "# Activando routing" && 
  prepareRouting &&
+ reiniciar_servicios &&
  echo "# Finalizado") | tee >(zenity --progress --pulsate --title "Aplicando cambios" )
 
 # Falta afegir la resta de configuració si és necessària (pàgina 38, etc)
