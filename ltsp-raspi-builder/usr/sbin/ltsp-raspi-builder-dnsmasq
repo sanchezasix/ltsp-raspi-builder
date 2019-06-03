@@ -62,6 +62,7 @@ function render_template() {
 ### Funcion para configurar el dnsmasq, que nos permite utilizar las variables anteriores###
 function generate_dnsmasq_conf {
   echo "# Generando el fichero /etc/dnsmasq/ltsp.conf"
+  #Con render_template podemos mezclar la plantilla de dnsmasq y las variables del scrit que estamos ejecutando.
   render_template /var/lib/ltsp-raspi-builder/templates/dnsmasq.template > /etc/dnsmasq.d/ltsp.conf
   #render_template /var/lib/ltsp-raspi-builder/templates/dnsmasq.template > /tmp/ltsp.conf # Para tests
 }
@@ -116,16 +117,19 @@ function preparedsd {
 function prepareRouting {
   # Añade las reglas de iptables para dar acceso a Internet a los clientes
 
-
+  #Calculamos la red por la ip de la variable INTERNAL_IP que es la ip que se assignara
+  #al servidor para la configuracion de la ip de la red interna
   if [ "${INTERNAL_IP}" != "" ]; then      
     IP=`ipcalc ${INTERNAL_IP} | grep Network | tr -s " " | cut -f 2 -d" "`
   fi
 
+   # Generamos el fichero utilizando la plantilla
   echo "# Generando el fichero /usr/sbin/routing"
   render_template /var/lib/ltsp-raspi-builder/templates/routing.template > /usr/sbin/routing
   chmod +x /usr/sbin/routing
 
-  # Ponemos en marcha el servicio
+  # Habilitamos el servicio para que cada vez que se ponga en marcha el sistema
+  # se pondra en marcha el servicio routing
   systemctl enable --now routing
 }
 
@@ -136,7 +140,7 @@ function reiniciar_servicios {
 }
 
 ### Inicializacion de las variables ###
-# Nos mostrara el processo en una pestaña emerguente del processo de instalacion.
+# Nos mostrará el proceso en una pestaña emergente del proceso de instalación.
 (generate_dirs_dnsmasq &&
  generate_dnsmasq_conf && 
  generate_network_conf && 

@@ -10,13 +10,19 @@ then
 fi
 
 BACKGROUND=`zenity --file-selection --title="Selecciona tu imagen" `
+
+#Actualizamos las claves ssh
+ltsp-update-sshkeys
+#Actualizamos los kernels del servidor ltsp
+ltsp-update-kernels
+
 # Generamos el chroot con ltsp-build-client, la arquitectura y la plantilla, sin generar todavía el .img
 ltsp-build-client --arch armhf --skipimage --config /etc/ltsp/templates/lubuntu-pi.conf
 
 # Añadimos algunos archivos de configuración en la imagen
 cp -r /var/lib/ltsp-raspi-builder/client.override/* /opt/ltsp/lubuntupi
   
-#Copiar imagen a por defecto
+#Copiar fondo a por defecto
 if [ "${BACKGROUND}" != "" ]; then
 	cp ${BACKGROUND} /opt/ltsp/lubuntupi/usr/share/lubuntu/wallpapers/ltsp-raspi.png
 fi
