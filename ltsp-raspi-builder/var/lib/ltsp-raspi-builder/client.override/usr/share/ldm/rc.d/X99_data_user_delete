@@ -3,8 +3,16 @@
 if  ! [ ${LDM_USERNAME} = “administrador” ]
 then
 rm -rf /home/${LDM_USERNAME}/*
+rm -rf /home/${LDM_USERNAME}/.*
 mkdir /home/${LDM_USERNAME}/.config
 chown ${LDM_USERNAME} /home/${LDM_USERNAME}/.config
+mkdir /home/${LDM_USERNAME}/Escritorio
+mkdir /home/${LDM_USERNAME}/Descargas
+mkdir /home/${LDM_USERNAME}/Documentos
+chown ${LDM_USERNAME} /home/${LDM_USERNAME}/Escritorio
+chown ${LDM_USERNAME} /home/${LDM_USERNAME}/Descargas
+chown ${LDM_USERNAME} /home/${LDM_USERNAME}/Documentos
+cp -r /usr/share/ltsp-raspi/Escritorio/* /home/${LDM_USERNAME}/Escritorio
 cp -r /usr/share/ltsp-raspi/config/* /home/${LDM_USERNAME}/.config
 fi
 
