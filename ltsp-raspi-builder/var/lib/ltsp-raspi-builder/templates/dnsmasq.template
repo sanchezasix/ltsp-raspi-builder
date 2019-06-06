@@ -53,7 +53,7 @@ log-dhcp
 ##### CONFIGURACIÓN DEL ARRANQUE POR PXE (PARA FUTUROS PC)
 
 # Fichero de arranque para PC
-dhcp-boot=/ltsp/mateLtsp/pxelinux.0
+dhcp-boot=/ltsp/lubuntupi/pxelinux.0
 
 # Opciones de arranque para PC
 dhcp-option=17,/opt/ltsp/biblioPC
