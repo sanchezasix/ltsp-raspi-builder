@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if  ! [ ${LDM_USERNAME} = “administrador” ]
+then
+rm -rf /home/${LDM_USERNAME}/*
+rm -rf /home/${LDM_USERNAME}/.*
+mkdir /home/${LDM_USERNAME}/.config
+mkdir /home/${LDM_USERNAME}/Escritorio
+mkdir /home/${LDM_USERNAME}/Imágenes
+mkdir /home/${LDM_USERNAME}/Público
+mkdir /home/${LDM_USERNAME}/Documentos
+mkdir /home/${LDM_USERNAME}/Música
+mkdir /home/${LDM_USERNAME}/Vídeos
+mkdir /home/${LDM_USERNAME}/Descargas
+mkdir /home/${LDM_USERNAME}/Plantillas
+cp -r /usr/share/ltsp-raspi/config/* /home/${LDM_USERNAME}/.config
+
+cat <<EOF > /home/${LDM_USERNAME}/.config/gtk-3.0/bookmarks
+file:///home/${LDM_USERNAME}/Descargas Descargas
+file:///home/${LDM_USERNAME}/Documentos Documentos
+file:///home/${LDM_USERNAME}/M%C3%BAsica Música
+file:///home/${LDM_USERNAME}/V%C3%ADdeos Vídeos
+EOF
+
+cp -r /usr/share/ltsp-raspi/Escritorio/* /home/${LDM_USERNAME}/Escritorio
+ln -s /home/${LDM_USERNAME}/ /home/${LDM_USERNAME}/Escritorio
+chown -R ${LDM_USERNAME} /home/${LDM_USERNAME}/
+chown -R ${LDM_USERNAME} /home/${LDM_USERNAME}/.config/
+
+fi
+
+exit 0
+
