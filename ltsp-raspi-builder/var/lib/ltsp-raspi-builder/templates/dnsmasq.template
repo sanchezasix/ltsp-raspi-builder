@@ -34,7 +34,7 @@ interface="${DHCP_INTERFACE}"
 dhcp-authoritative
 dhcp-ignore-names
 dhcp-option=option:router,0.0.0.0
-dhcp-option=option:dns-server,${DNS_SERVER} ## Cal revisar açò....
+dhcp-option=option:dns-server,${DNS_SERVER}
 dhcp-option=option:domain-name,${DOMAIN_NAME}
 dhcp-option=option:domain-search,${DOMAIN_NAME}
 
