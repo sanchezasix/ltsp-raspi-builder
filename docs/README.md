@@ -60,7 +60,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 * **En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.**
 
-![red externa](img/red_externa.png)
+	![red externa](img/red_externa.png)
 
 * **En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.**
 
@@ -81,18 +81,18 @@ Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va 
 
 * **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
 
-![imagen fondo](img/seleccion_imagen.png)
+	![imagen fondo](img/seleccion_imagen.png)
 
 Una vez seleccionada la imagen para el fondo, empezará la generación del chroot y una vez generado, se generará la imagen del sistema a partir del chroot generado en /opt/ltsp, en este caso con el nombre lubuntupi.
 
-![chroot 1](img/crear_chroot_1.png) 
+	![chroot 1](img/crear_chroot_1.png) 
 
 Cuando se termine de generar la imagen nos aseguramos que ha terminado correctamente la creación de la imagen del sistema , subimos en el terminal hacia arriba hasta encontrar la barra del porcentaje y buscamos un poco más hacia arriba y buscamos la linea que pone la instalación del cliente LTSP se completo satisfactoriamente, en el caso de que no se generará correctamente pondría la instalación del cliente LTSP no se completo satisfactoriamente .
  
-![chroot 2](img/crear_chroot_2.png)
+	![chroot 2](img/crear_chroot_2.png)
 
 
-![chroot 3](img/crear_chroot_3.png)
+	![chroot 3](img/crear_chroot_3.png)
 
 
 
