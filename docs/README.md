@@ -34,17 +34,18 @@ Muy importante hay que ejecutar el siguiente comando como root y no nos sirve co
 Descargamos los paquetes que nos va dar la posibilidad de crear un chroot de un sistema con una arquitectura diferente, en este caso la arquitectura que utiliza la Raspberry Pi es armhf. 
 
 
-apt --yes install qemu-user-static binfmt-support
+	apt --yes install qemu-user-static binfmt-support
 
 ### 3. Configuración del servidor:
 
 
 Resumen del orden de ejecución de los scripts que vamos a seguir en la configuración:
-	
+´´´	
 Ruta donde se guardan: /usr/sbin/		 
 ltsp-raspi-builder-dnsmasq
 ltsp-raspi-builder
 ltsp-raspi-builder-sd
+´´´
 
 #### Configuración del dnsmasq y el servicio routing.
 
