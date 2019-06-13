@@ -56,7 +56,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 * **Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.**
 
-		![red interna](img/red_interna.png)
+	![red interna](img/red_interna.png)
 
 * **En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.**
 
@@ -64,11 +64,11 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 * **En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.**
 
-		![configuracion dnsmasq](img/config_dnsmasq.png)
+	![configuracion dnsmasq](img/config_dnsmasq.png)
 
 * **Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.**
 
-		![finalizacion proceso](img/finalizacion.png)
+	![finalizacion proceso](img/finalizacion.png)
 
 
 ### 4. Creación de el chroot y generar imagen.
