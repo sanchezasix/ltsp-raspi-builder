@@ -40,21 +40,19 @@ Descargamos los paquetes que nos va dar la posibilidad de crear un chroot de un 
 
 
 Resumen del orden de ejecución de los scripts que vamos a seguir en la configuración:
-´´´	
-Ruta donde se guardan: /usr/sbin/		 
-ltsp-raspi-builder-dnsmasq
-ltsp-raspi-builder
-ltsp-raspi-builder-sd
-´´´
+
+Ruta donde se guardan: /usr/sbin/
+* **ltsp-raspi-builder-dnsmasq**
+* **ltsp-raspi-builder**
+* **ltsp-raspi-builder-sd**
+
 
 #### Configuración del dnsmasq y el servicio routing.
 
 El primer paso a seguir en la ejecución de los scripts es la configuración de el dnsmasq y asignar a la tarjeta interna una ip fija para que sirva el servidor como DHCP y DNS interno de la red y también se utilizará la ip recogida del servido para calcular la red y la tarjeta de red externa para crear el script que ejecutará el servicio llamado routing, que es el encargado de hacer que cada vez se ponga en marcha el servidor, se añaden las reglas iptables de enrutamiento a la tabla NAT que es la que se encarga de hacer el redireccionamiento de los paquetes de una red a otra.
 
 
-		Ejecutamos como sudo o root:
-
-			bash ltsp-raspi-builder-dnsmasq
+	Ejecutamos: sudo ltsp-raspi-builder-dnsmasq
 
 * **Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.**
 
@@ -79,7 +77,7 @@ Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va 
 
 **Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.**
 
-	Ejecutamos con: sudo bash ltsp-raspi-builder
+	Ejecutamos con: sudo ltsp-raspi-builder
 
 * **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
 
@@ -108,7 +106,7 @@ Cuando se termine de generar la imagen nos aseguramos que ha terminado correctam
 
 Utilizaremos el script ltsp-raspi-builder-sd para generar el boot que utilizaremos para que la raspberry pueda ejecutar el sistema como cliente del servidor LTSP.
 
-	Ejecutamos con: sudo bash ltsp-raspi-builder-sd
+	Ejecutamos con: sudo ltsp-raspi-builder-sd
 
 Aparecerá una ventana que es para seleccionar donde queremos que carpeta queremos que nos genere el boot para la raspberry.
 
