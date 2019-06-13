@@ -55,7 +55,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 			bash ltsp-raspi-builder-dnsmasq
 
-* **Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.
+* **Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.**
 
 ![red interna](img/red_interna.png)
 
@@ -63,11 +63,11 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 ![red externa](img/red_externa.png)
 
-* **En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.
+* **En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.**
 
 ![configuracion dnsmasq](img/config_dnsmasq.png)
 
-* **Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.
+* **Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.**
 
 ![finalizacion proceso](img/finalizacion.png)
 
@@ -76,11 +76,11 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va a proporcionar el servidor LTSP a las Raspberry Pi’s, y generamos la imagen del sistema con todos los paquetes y configuración que hemos realizado en el desarrollo de la solución.
 
-Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.
+* **Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.**
 
 	Ejecutamos con: sudo bash ltsp-raspi-builder
 
-Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.
+** **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
 
 ![imagen fondo](img/seleccion_imagen.png)
 
