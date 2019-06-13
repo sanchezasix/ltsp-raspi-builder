@@ -77,21 +77,20 @@ Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va 
 
 **Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.**
 
-	Ejecutamos con: sudo ltsp-raspi-builder
+		Ejecutamos con: sudo ltsp-raspi-builder
 
 * **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
 
 	![imagen fondo](img/seleccion_imagen.png)
 
 Una vez seleccionada la imagen para el fondo, empezará la generación del chroot y una vez generado, se generará la imagen del sistema a partir del chroot generado en /opt/ltsp, en este caso con el nombre lubuntupi.
-
+.
 	![chroot 1](img/crear_chroot_1.png) 
 
 Cuando se termine de generar la imagen nos aseguramos que ha terminado correctamente la creación de la imagen del sistema , subimos en el terminal hacia arriba hasta encontrar la barra del porcentaje y buscamos un poco más hacia arriba y buscamos la linea que pone la instalación del cliente LTSP se completo satisfactoriamente, en el caso de que no se generará correctamente pondría la instalación del cliente LTSP no se completo satisfactoriamente .
- 
-	![chroot 2](img/crear_chroot_2.png)
-
-
+.
+ 	![chroot 2](img/crear_chroot_2.png)
+.
 	![chroot 3](img/crear_chroot_3.png)
 
 
@@ -106,21 +105,21 @@ Cuando se termine de generar la imagen nos aseguramos que ha terminado correctam
 
 Utilizaremos el script ltsp-raspi-builder-sd para generar el boot que utilizaremos para que la raspberry pueda ejecutar el sistema como cliente del servidor LTSP.
 
-	Ejecutamos con: sudo ltsp-raspi-builder-sd
+		Ejecutamos con: sudo ltsp-raspi-builder-sd
 
 Aparecerá una ventana que es para seleccionar donde queremos que carpeta queremos que nos genere el boot para la raspberry.
-
-![seleccion carpeta boot](img/guardar_boot.png)
+.
+	![seleccion carpeta boot](img/guardar_boot.png)
 
 Una vez seleccionada, nos creará el boot.
-
-![boot_creado](img/directorio_boot.png)
+.
+	![boot_creado](img/directorio_boot.png)
 
 **2. Copiar el Boot en la SD para la Raspberry Pi.**
-
-![boot_sd](img/boot_sd.png)
+.
+	![boot_sd](img/boot_sd.png)
 
 **3. Probar que funciona todo correctamente.**	
-
-![raspberry](img/raspberry_funcionando.png)
+.
+	![raspberry](img/raspberry_funcionando.png)
 
