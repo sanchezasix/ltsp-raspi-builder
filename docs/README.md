@@ -132,6 +132,26 @@ Una vez seleccionada, nos creará el boot.
 	![raspberry](img/raspberry_funcionando.png)
 
 
-### 6. Utilizacion de ltsp-run-raspi
+### 6. Utilizacion de ltsp-run-raspi.
+
+
+El comando ltsp-run-lubuntupi, nos sirve para modificar el chroot gráficamente sin tener que hacerlo por terminal. Muy importante hay que regenerar la imagen por terminal, se falcilita la edicion del chroot para usuarios que no suelen utilizar el terminal.
+
 .
 	![run_xephyr](img/ltsp_run_raspi.png)
+	
+	
+
+#### Pasos a seguir después de modificar el chroot:
+
+* **Regeneramos los kernels del chroot.**
+
+		sudo ltsp-chroot -p -m -a lubuntupi /usr/share/ltsp/update-kernels
+
+* **Actualizamos los kernels del servidor LTSP.**
+
+		sudo ltsp-update-kernels
+
+* **Regeneramos la imagen con:**
+
+		sudo ltsp-update-image lubuntupi
