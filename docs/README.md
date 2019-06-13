@@ -131,3 +131,7 @@ Una vez seleccionada, nos creará el boot.
 .
 	![raspberry](img/raspberry_funcionando.png)
 
+
+### 6. Utilizacion de ltsp-run-raspi
+.
+	![run_xephyr](img/ltsp_run_raspi.png)
