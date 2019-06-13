@@ -36,7 +36,7 @@ Descargamos los paquetes que nos va dar la posibilidad de crear un chroot de un 
 
 apt --yes install qemu-user-static binfmt-support
 
-### 3 Configuración del servidor:
+### 3. Configuración del servidor:
 
 
 Resumen del orden de ejecución de los scripts que vamos a seguir en la configuración:
@@ -76,11 +76,11 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va a proporcionar el servidor LTSP a las Raspberry Pi’s, y generamos la imagen del sistema con todos los paquetes y configuración que hemos realizado en el desarrollo de la solución.
 
-* **Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.**
+**Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automáticamente.**
 
 	Ejecutamos con: sudo bash ltsp-raspi-builder
 
-** **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
+* **Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.**
 
 ![imagen fondo](img/seleccion_imagen.png)
 
@@ -97,13 +97,13 @@ Cuando se termine de generar la imagen nos aseguramos que ha terminado correctam
 
 
 
-Reiniciamos el servicio nbd-server para asegurarnos que cuando arranquemos la Raspberry Pi el servidor LTSP sirva la imagen del sistema.
+* **Reiniciamos el servicio nbd-server para asegurarnos que cuando arranquemos la Raspberry Pi el servidor LTSP sirva la imagen del sistema.**
 
-sudo service nbd-server restart.
+	sudo service nbd-server restart.
 
-5.4.4 Generar Boot para Raspberry Pi.
+### 4. Generar Boot para Raspberry Pi.
 
-1. Generamos  boot para la raspberry pi.
+**1. Generamos  boot para la raspberry pi.**
 
 Utilizaremos el script ltsp-raspi-builder-sd para generar el boot que utilizaremos para que la raspberry pueda ejecutar el sistema como cliente del servidor LTSP.
 
@@ -117,11 +117,11 @@ Una vez seleccionada, nos creará el boot.
 
 ![boot_creado](img/directorio_boot.png)
 
-2. Copiar el Boot en la SD para la Raspberry Pi.
+**2. Copiar el Boot en la SD para la Raspberry Pi.**
 
 ![boot_sd](img/boot_sd.png)
 
-3. Probar que funciona todo correctamente.	
+**3. Probar que funciona todo correctamente.**	
 
 ![raspberry](img/raspberry_funcionando.png)
 
