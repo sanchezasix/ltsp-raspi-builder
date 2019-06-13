@@ -2,9 +2,9 @@
 
 ![http://www.ltsp.org/images/logo.png](http://www.ltsp.org/images/logo.png)
 
-## Preparación del servidor.r
+## Preparación del servidor
 
-	Instalado el sistema operativo, en este caso se va a utilizar la lubuntu 18.04.
+	###Instalado el sistema operativo, en este caso se va a utilizar lubuntu 18.04.
 
 1. Procederemos a la **instalación del paquete** 
 	
@@ -58,7 +58,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.
 
-<center>![red interna](img/red_interna.png)</center>
+![red interna](img/red_interna.png)
 
 En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.
 
