@@ -54,22 +54,23 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 		Ejecutamos como sudo o root:
 
-			bash ltsp-raspi-builder-dnsmasq
+			bash ltsp-raspi-builder-dnsmasq
 
 Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.
 
-
+[red interna](img/red_interna.png)
 
 En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.
 
+[red externa](img/red_externa.png)
 
 En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.
 
-
+[configuracion dnsmasq](img/config_dnsmasq.png)
 
 Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.
 
-
+[finalizacion proceso](img/finalizacion.png)
 
 
 5.4.3. Creación de el chroot y generar imagen.
@@ -82,23 +83,24 @@ Para ello ejecutamos el script ltsp-raspi-builder que lo realizara todo automát
 
 Nos pedirá que seleccionemos una imagen, que es la que nos asignará de fondo de pantalla para los usuarios.
 
-
+[imagen fondo](img/seleccion_imagen.png)
 
 Una vez seleccionada la imagen para el fondo, empezará la generación del chroot y una vez generado, se generará la imagen del sistema a partir del chroot generado en /opt/ltsp, en este caso con el nombre lubuntupi.
- 
+
+[chroot 1](img/crear_chroot_1.png) 
 
 Cuando se termine de generar la imagen nos aseguramos que ha terminado correctamente la creación de la imagen del sistema , subimos en el terminal hacia arriba hasta encontrar la barra del porcentaje y buscamos un poco más hacia arriba y buscamos la linea que pone la instalación del cliente LTSP se completo satisfactoriamente, en el caso de que no se generará correctamente pondría la instalación del cliente LTSP no se completo satisfactoriamente .
  
+[chroot 2](img/crear_chroot_2.png)
 
 
-
-
+[chroot 3](img/crear_chroot_3.png)
 
 
 
 Reiniciamos el servicio nbd-server para asegurarnos que cuando arranquemos la Raspberry Pi el servidor LTSP sirva la imagen del sistema.
 
-sudo service nbd-server restart.
+sudo service nbd-server restart.
 
 5.4.4 Generar Boot para Raspberry Pi.
 
@@ -110,18 +112,17 @@ Utilizaremos el script ltsp-raspi-builder-sd para generar el boot que utilizarem
 
 Aparecerá una ventana que es para seleccionar donde queremos que carpeta queremos que nos genere el boot para la raspberry.
 
-
+[seleccion carpeta boot](img/guardar_boot.png)
 
 Una vez seleccionada, nos creará el boot.
 
-
-
+[boot_creado](img/directorio_boot.png)
 
 2. Copiar el Boot en la SD para la Raspberry Pi.
 
-
+[boot_sd](img/boot_sd.png)
 
 3. Probar que funciona todo correctamente.	
 
-
+[raspberry](img/raspberry_funcionando.png)
 
