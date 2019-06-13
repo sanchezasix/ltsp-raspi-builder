@@ -89,7 +89,7 @@ Una vez seleccionada la imagen para el fondo, empezará la generación del chroo
 .
 	![chroot 1](img/crear_chroot_1.png) 
 
-Cuando se termine de generar la imagen nos aseguramos que ha terminado correctamente la creación de la imagen del sistema , subimos en el terminal hacia arriba hasta encontrar la barra del porcentaje y buscamos un poco más hacia arriba y buscamos la linea que pone la instalación del cliente LTSP se completo satisfactoriamente, en el caso de que no se generará correctamente pondría la instalación del cliente LTSP no se completo satisfactoriamente .
+Cuando se termine de generar la imagen nos aseguramos que ha terminado correctamente la creación de la imagen del sistema , subimos en el terminal hacia arriba hasta encontrar la barra del porcentaje y buscamos un poco más hacia arriba y buscamos la linea que pone la instalación del cliente LTSP se completo satisfactoriamente, en el caso de que no se generará correctamente pondría la instalación del cliente LTSP no se completo satisfactoriamente
 
 .
  	![chroot 2](img/crear_chroot_2.png)
@@ -121,13 +121,13 @@ Una vez seleccionada, nos creará el boot.
 	![boot_creado](img/directorio_boot.png)
 
 
-**2. Copiar el Boot en la SD para la Raspberry Pi.**
+**2. Copiar el Boot en la SD para la Raspberry Pi**
 .
 	![boot_sd](img/boot_sd.png)
 
 
 
-**3. Probar que funciona todo correctamente.**	
+**3. Probar que funciona todo correctamente**	
 .
 	![raspberry](img/raspberry_funcionando.png)
 
