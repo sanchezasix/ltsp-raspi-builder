@@ -11,7 +11,7 @@
 ```
 ltsp-raspi-builder_0.0.2_amd64.deb
 ```
- paquete [enlace](https://github.com/sanchezasix/ltsp-raspi-builder/raw/master/ltsp-raspi-builder_0.0.2_amd64.deb)
+[Descargar paquete.](https://github.com/sanchezasix/ltsp-raspi-builder/raw/master/ltsp-raspi-builder_0.0.2_amd64.deb)
 #### Ejecutaremos como root o sudo el siguiente comando para la instalación del paquete:
 		
 En este paso convertiremos el equipo en un Servidor LTSP instalaremos todos los paquetes necesarios para poder utilizar el equipo como servidor ltsp y también nos dejará unas plantillas y scripts para facilitar la configuración del servidor que mas tarde ejecutaremos una vez seguidos unos pasos previos a la configuración, también nos dejará unos archivos que los utilizaremos para copiarlos al chroot para su configuración para así generar la imagen de sistema ya configurada.
