@@ -58,7 +58,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 	![red interna](img/red_interna.png)
 
-* **En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.
+* **En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.**
 
 ![red externa](img/red_externa.png)
 
