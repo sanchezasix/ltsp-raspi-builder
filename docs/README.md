@@ -6,7 +6,7 @@
 
 #### Instalamos el sistema operativo, en este caso se va a utilizar lubuntu 18.04.
 
-1. Procederemos a la **instalación del paquete** 
+### 1. Procederemos a la **instalación del paquete** 
 	
 ```
 ltsp-raspi-builder_0.0.2_amd64.deb
@@ -34,7 +34,7 @@ Muy importante hay que ejecutar el siguiente comando como root y no nos sirve co
 Descargamos los paquetes que nos va dar la posibilidad de crear un chroot de un sistema con una arquitectura diferente, en este caso la arquitectura que utiliza la Raspberry Pi es armhf. 
 
 
-	apt --yes install qemu-user-static binfmt-support
+		apt --yes install qemu-user-static binfmt-support
 
 ### 3. Configuración del servidor:
 
