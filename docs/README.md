@@ -94,7 +94,7 @@ Cuando se termine de generar la imagen nos aseguramos que ha terminado correctam
 [chroot 2](img/crear_chroot_2.png)
 
 
-[chroot 3](img/crear_chroot_3.png)
+[chroot 3](docs/img/crear_chroot_3.png)
 
 
 
