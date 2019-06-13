@@ -4,7 +4,7 @@
 
 ## Preparación del servidor
 
-	###Instalado el sistema operativo, en este caso se va a utilizar lubuntu 18.04.
+###Instalamos el sistema operativo, en este caso se va a utilizar lubuntu 18.04.
 
 1. Procederemos a la **instalación del paquete** 
 	
@@ -12,7 +12,7 @@
 ltsp-raspi-builder_0.0.2_amd64.deb
 ```
 
-	Ejecutaremos como root o sudo el siguiente comando para la instalación del paquete:
+###Ejecutaremos como root o sudo el siguiente comando para la instalación del paquete:
 		
 En este paso convertiremos el equipo en un Servidor LTSP instalaremos todos los paquetes necesarios para poder utilizar el equipo como servidor ltsp y también nos dejará unas plantillas y scripts para facilitar la configuración del servidor que mas tarde ejecutaremos una vez seguidos unos pasos previos a la configuración, también nos dejará unos archivos que los utilizaremos para copiarlos al chroot para su configuración para así generar la imagen de sistema ya configurada.
 
