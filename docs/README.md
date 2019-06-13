@@ -71,7 +71,7 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 ![finalizacion proceso](img/finalizacion.png)
 
 
-5.4.3. Creación de el chroot y generar imagen.
+### 4. Creación de el chroot y generar imagen.
 
 Crearemos el chroot que utilizaremos para generar la imagen del sistema, que va a proporcionar el servidor LTSP a las Raspberry Pi’s, y generamos la imagen del sistema con todos los paquetes y configuración que hemos realizado en el desarrollo de la solución.
 
@@ -100,7 +100,7 @@ Cuando se termine de generar la imagen nos aseguramos que ha terminado correctam
 
 	sudo service nbd-server restart.
 
-### 4. Generar Boot para Raspberry Pi.
+### 5. Generar Boot para Raspberry Pi.
 
 **1. Generamos  boot para la raspberry pi.**
 
