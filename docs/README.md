@@ -18,7 +18,7 @@ En este paso convertiremos el equipo en un Servidor LTSP instalaremos todos los 
 
 		gdebi ltsp-raspi-builder_0.0.2_amd64.deb
 
-2. Preparación previa a la configuración del servidor LTSP.
+### 2. Preparación previa a la configuración del servidor LTSP.
 
 Añadiremos el siguiente repositorio para poder descargar los paquetes necesarios para la creación del chroot en el servidor LTSP.
 		sudo add-apt-repository --yes ppa:ts.sch.gr
@@ -36,8 +36,7 @@ Descargamos los paquetes que nos va dar la posibilidad de crear un chroot de un 
 
 apt --yes install qemu-user-static binfmt-support
 
-
-5.4.2 Configuración del servidor:
+### 3 Configuración del servidor:
 
 
 Resumen del orden de ejecución de los scripts que vamos a seguir en la configuración:
@@ -47,7 +46,7 @@ ltsp-raspi-builder-dnsmasq
 ltsp-raspi-builder
 ltsp-raspi-builder-sd
 
-Configuración del dnsmasq y el servicio routing.
+#### Configuración del dnsmasq y el servicio routing.
 
 El primer paso a seguir en la ejecución de los scripts es la configuración de el dnsmasq y asignar a la tarjeta interna una ip fija para que sirva el servidor como DHCP y DNS interno de la red y también se utilizará la ip recogida del servido para calcular la red y la tarjeta de red externa para crear el script que ejecutará el servicio llamado routing, que es el encargado de hacer que cada vez se ponga en marcha el servidor, se añaden las reglas iptables de enrutamiento a la tabla NAT que es la que se encarga de hacer el redireccionamiento de los paquetes de una red a otra.
 
@@ -56,19 +55,19 @@ El primer paso a seguir en la ejecución de los scripts es la configuración de 
 
 			bash ltsp-raspi-builder-dnsmasq
 
-Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.
+* **Pedirá en la primera ventana que seleccionemos la tarjeta de red que vamos a utilizar como interna.
 
 ![red interna](img/red_interna.png)
 
-En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.
+* **En la segunda ventana seleccionaremos la tarjeta de red que vamos a utilizar como externa.
 
 ![red externa](img/red_externa.png)
 
-En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.
+* **En la tercera ventana nos pedirá la ip que queremos asignar al servidor en la red interna, la máscara de red, el nombre del dominio, ip inicial y ip final para el asignacion de ips por DHCP.
 
 ![configuracion dnsmasq](img/config_dnsmasq.png)
 
-Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.
+* **Con estos pasos tenemos la configuración de el dnsmasq, creado el servicio routing con la ip y tarjeta correspondiente, una vez aparezca la siguiente ventana y haya finalizado habremos terminado la configuración.
 
 ![finalizacion proceso](img/finalizacion.png)
 
